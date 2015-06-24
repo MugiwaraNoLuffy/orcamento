@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="5dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/editName"
+            android:hint="Name"
+            android:textColorHint="#ff8b8b8b"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_marginTop="50dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/editEmail"
+            android:hint="E-mail"
+            android:textColorHint="#ff8b8b8b"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_marginTop="50dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/editPass"
+            android:hint="Password"
+            android:textColorHint="#ff8b8b8b"
+            android:layout_gravity="center"
+            android:layout_margin="5dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/editPass2"
+            android:hint="Re-type password"
+            android:textColorHint="#ff8b8b8b"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="50dp" />
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Keep me conected"
+            android:id="@+id/keepMeConected"
+            android:checked="true" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:id="@+id/buttonRegister" />
+    </LinearLayout>
+
+</LinearLayout>
