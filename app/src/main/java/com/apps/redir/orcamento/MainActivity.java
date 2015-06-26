@@ -1,6 +1,7 @@
 package com.apps.redir.orcamento;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -20,34 +21,44 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //RegisterTask registerTask = new RegisterTask();
-
-        //registerTask.execute();
-        Intent intent = new Intent(this, RegisterActivity.class);
-        int requestCode = 1; // Or some number you choose
-        startActivityForResult(intent, requestCode);
-        //startActivity(intent);
+        SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
 
         textView = (TextView) findViewById(R.id.textView);
 
         LoginHelper helper = new LoginHelper(this);
-/*        User user = new User();
-        user.setName("redi");
-        user.setEmail("redi@gmail.com");
-        user.setPassword("123456789");
-        helper.insert(user.getContent());
-
         ArrayList<User> users = helper.selectAll();
 
-        Log.e("Login in", users.get(0).toString());
-        Log.e("Login in", users.get(1).toString());
-        Log.e("Login in", users.get(2).toString());*/
+/*
+        if(users.size() == 0 ){
+            Intent intent = new Intent(this, RegisterActivity.class);
+            int requestCode = 1; // Or some number you choose
+            startActivityForResult(intent, requestCode);
+        }
+        else
+        {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+
+        if(users!=null)
+            intent.putParcelableArrayListExtra("users", users);
+        Log.e("Main", String.valueOf(users.size()));
+        int requestCode = 1;
+        startActivityForResult(intent, requestCode);*/
+       // }
+
     }
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
         // Collect data from the intent and use it
-        String value = data.getStringExtra("someValue");
-        Log.e("Retorno", value);
-        textView.setText(value);
+        try {
+            String value = data.getStringExtra("status");
+            Log.e("Retorno", value);
+            SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+
+            String restoredText = new LoginHelper(this).selectId((int) prefs.getLong("userid", 1)).getEmail();
+            textView.setText(restoredText);
+        }
+        catch( NullPointerException e){
+            e.printStackTrace();
+        }
     }
 
     @Override

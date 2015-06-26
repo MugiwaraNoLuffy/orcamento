@@ -1,13 +1,17 @@
 package com.apps.redir.orcamento.SQLiteDatabase;
 
 import android.content.ContentValues;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by redir on 6/16/2015.
  */
-public class User extends Object
-{
+public class User implements Parcelable {
+
     public static final String NAME = "name";
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
@@ -20,6 +24,13 @@ public class User extends Object
     public Date last_login;
     private String token;
 
+    public User(Parcel in)
+    {
+        name = in.readString();
+        email = in.readString();
+        password = in.readString();
+        token = in.readString();
+    }
     public User()
     {
 
@@ -85,4 +96,31 @@ public class User extends Object
     public void setToken(String token) {
         this.token = token;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(email);
+        dest.writeString(password);
+        dest.writeString(token);
+    }
+
+    public String getToken(){
+        return token;
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

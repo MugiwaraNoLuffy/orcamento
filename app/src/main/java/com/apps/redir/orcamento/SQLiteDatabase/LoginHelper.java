@@ -22,7 +22,7 @@ import java.util.ListIterator;
  */
 public class LoginHelper extends SQLiteOpenHelper
 {
-
+    private final String LOG_TAG = LoginHelper.class.getSimpleName();
     private static final int DATABASE_VERSION = 2;
     static final String DATABASE_NAME = "orcamento.db";
 
@@ -95,6 +95,7 @@ public class LoginHelper extends SQLiteOpenHelper
         }
         return users;
     }
+
     public long Login(User user){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(UserEntry.TABLE_NAME, // a. table
@@ -105,8 +106,15 @@ public class LoginHelper extends SQLiteOpenHelper
                 null, // f. having
                 null, // g. order by
                 null); // h. limit
-
-        return cursor.getCount();
+        if(cursor.getCount() == 0){
+            long i = insert(user.getContent());
+            if( i > 0){
+                Log.e(LOG_TAG, "User added to local database");
+            }
+            return i;
+        }
+        cursor.moveToFirst();
+        return cursor.getLong(0);
     }
 
 }
