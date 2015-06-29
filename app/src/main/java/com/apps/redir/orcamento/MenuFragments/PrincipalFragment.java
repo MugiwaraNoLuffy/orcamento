@@ -3,6 +3,7 @@ package com.apps.redir.orcamento.MenuFragments;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
+
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,16 +11,15 @@ import android.view.ViewGroup;
 
 import com.apps.redir.orcamento.R;
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ReportFragment.OnFragmentInteractionListener} interface
+ * {@link PrincipalFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ReportFragment#newInstance} factory method to
+ * Use the {@link PrincipalFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ReportFragment extends Fragment {
+public class PrincipalFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -37,11 +37,11 @@ public class ReportFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ReportFragment.
+     * @return A new instance of fragment PrincipalFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ReportFragment newInstance(String param1, String param2) {
-        ReportFragment fragment = new ReportFragment();
+    public static PrincipalFragment newInstance(String param1, String param2) {
+        PrincipalFragment fragment = new PrincipalFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -49,7 +49,7 @@ public class ReportFragment extends Fragment {
         return fragment;
     }
 
-    public ReportFragment() {
+    public PrincipalFragment() {
         // Required empty public constructor
     }
 
@@ -66,7 +66,7 @@ public class ReportFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_report, container, false);
+        return inflater.inflate(R.layout.fragment_principal, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -75,18 +75,7 @@ public class ReportFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-/*
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-*/
+
     @Override
     public void onDetach() {
         super.onDetach();

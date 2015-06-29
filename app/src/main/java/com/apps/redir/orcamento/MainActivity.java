@@ -9,6 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.apps.redir.orcamento.AuthActivities.LoginActivity;
+import com.apps.redir.orcamento.AuthActivities.RegisterActivity;
+import com.apps.redir.orcamento.Principal.PrincipalActivity;
 import com.apps.redir.orcamento.SQLiteDatabase.LoginHelper;
 import com.apps.redir.orcamento.SQLiteDatabase.User;
 
@@ -28,7 +31,7 @@ public class MainActivity extends ActionBarActivity {
         LoginHelper helper = new LoginHelper(this);
         ArrayList<User> users = helper.selectAll();
 
-/*
+
         if(users.size() == 0 ){
             Intent intent = new Intent(this, RegisterActivity.class);
             int requestCode = 1; // Or some number you choose
@@ -42,8 +45,8 @@ public class MainActivity extends ActionBarActivity {
             intent.putParcelableArrayListExtra("users", users);
         Log.e("Main", String.valueOf(users.size()));
         int requestCode = 1;
-        startActivityForResult(intent, requestCode);*/
-       // }
+        startActivityForResult(intent, requestCode);
+        }
 
     }
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
@@ -55,6 +58,8 @@ public class MainActivity extends ActionBarActivity {
 
             String restoredText = new LoginHelper(this).selectId((int) prefs.getLong("userid", 1)).getEmail();
             textView.setText(restoredText);
+            Intent intent = new Intent(this, PrincipalActivity.class);
+            startActivity(intent);
         }
         catch( NullPointerException e){
             e.printStackTrace();

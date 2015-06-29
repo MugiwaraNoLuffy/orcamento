@@ -5,24 +5,19 @@
     android:layout_height="match_parent"
     tools:context="com.example.uguideufopalfa.MainActivity" >
 
-    <!-- Framelayout to display Fragments -->
-
     <FrameLayout
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!-- Listview to display slider menu -->
-
-    <ListView
+    <ExpandableListView
         android:id="@+id/listView"
-        android:layout_width="240dp"
         android:layout_height="match_parent"
+        android:layout_width="240dp"
         android:layout_gravity="start"
         android:background="#f6f6f6"
         android:choiceMode="singleChoice"
         android:divider="#abb8baae"
-        android:dividerHeight="1dp" />
+        android:dividerHeight="1dp"/>
+
 </android.support.v4.widget.DrawerLayout>
-
-

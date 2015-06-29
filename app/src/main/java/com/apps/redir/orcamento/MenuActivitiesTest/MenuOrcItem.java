@@ -6,6 +6,7 @@ package com.apps.redir.orcamento.MenuActivitiesTest;
 public class MenuOrcItem {
     private int imageId;
     private String name;
+    private boolean clickable = true;
 
     public MenuOrcItem( String item){
         super();
@@ -27,5 +28,13 @@ public class MenuOrcItem {
 
     public void setName(String item) {
         this.name = item;
+    }
+
+    public void setClickable(boolean bool){
+        clickable = bool;
+    }
+
+    public boolean isClickable(){
+        return clickable;
     }
 }

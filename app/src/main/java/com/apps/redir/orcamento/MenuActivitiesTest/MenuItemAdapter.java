@@ -67,6 +67,12 @@ public class MenuItemAdapter extends BaseAdapter {
 
         return convertView;
     }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return listItems.get(position).isClickable();
+    }
+
     private class ViewHolder {
         TextView name;
         ImageView img;
