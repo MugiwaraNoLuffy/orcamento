@@ -17,7 +17,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.apps.redir.orcamento.R;
-import com.apps.redir.orcamento.SQLiteDatabase.LoginHelper;
+import com.apps.redir.orcamento.SQLiteDatabase.DatabaseHelper;
 import com.apps.redir.orcamento.SQLiteDatabase.User;
 
 import org.apache.http.HttpResponse;
@@ -38,6 +38,7 @@ import java.util.ArrayList;
 
 
 public class LoginActivity extends ActionBarActivity {
+    String LOG_TAG = LoginActivity.class.getSimpleName();
     private static EditText email;
     private static EditText passw;
 
@@ -46,91 +47,109 @@ public class LoginActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        try {
-            final ArrayList<User> users = (ArrayList) getIntent().getParcelableArrayListExtra("users"); // http://pt.stackoverflow.com/questions/27175/enviar-um-arraylist-de-objetos-para-uma-activity
-            final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-            alertDialog.setTitle("Select one to log in");
-            final String[] items = new String[users.size()];
-            int i = 0;
-            for( User user : users ){
-                items[i] = user.getEmail();
-                i++;
+        DatabaseHelper helper = new DatabaseHelper(this);
+        final ArrayList<User> users;
+        email = (EditText) findViewById(R.id.editEmail);
+        passw = (EditText) findViewById(R.id.editPass);
+        SharedPreferences prefs = getSharedPreferences("myPref", MODE_PRIVATE);
+        User user = null;
+        long id = 0;
+        id = prefs.getLong("userid", 1);
+        if(id > 0 ){
+            user = helper.getUserById(id);
+            if(user != null) {
+                Log.e(LOG_TAG, user.getContent().toString());
+                email.setText(user.getEmail().toString());
+                passw.setText(user.getPassword().toString());
+                LoginTask registerTask = new LoginTask();
+                registerTask.execute(email.getText().toString(), passw.getText().toString());
+            }
+        }
+        if(user == null) {
+            users = helper.selectAll();
+
+            try {
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                alertDialog.setTitle("Select one to log in");
+                final String[] items = new String[users.size()];
+                int i = 0;
+                for (User u : users) {
+                    items[i] = u.getEmail();
+                    i++;
+                }
+
+                // alertDialog.setMessage(users.get(0).toString());
+                alertDialog.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+
+                        email.setText(items[item]);
+                        passw.setText(users.get(item).getPassword());
+                        switch (item) {
+                            case 0:
+                                // Your code when first option seletced
+
+                                break;
+                            case 1:
+                                // Your code when 2nd  option seletced
+
+                                break;
+                            case 2:
+                                // Your code when 3rd option seletced
+                                break;
+                            case 3:
+                                // Your code when 4th  option seletced
+                                break;
+
+                        }
+
+                    }
+                });
+                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Add your code for the button here.
+                    }
+                });
+                alertDialog.create();
+                alertDialog.show();
+            } catch (NullPointerException e) {
+                e.printStackTrace();
             }
 
-            // alertDialog.setMessage(users.get(0).toString());
-            alertDialog.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int item) {
 
-                    email.setText(items[item]);
-                    passw.setText(users.get(item).getPassword());
-                    switch (item) {
-                        case 0:
-                            // Your code when first option seletced
 
-                            break;
-                        case 1:
-                            // Your code when 2nd  option seletced
+            Button button = (Button) findViewById(R.id.buttonLogin);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int error = 0;
+                    if (email.getText().toString().equals("")) {
+                        Toast.makeText(getBaseContext(), "Field e-mail is mandatory!", Toast.LENGTH_LONG).show();
+                        error = error + 1;
+                    }
+                    if (passw.getText().toString().equals("")) {
+                        Toast.makeText(getBaseContext(), "Field password is mandatory!", Toast.LENGTH_LONG).show();
+                        error = error + 1;
+                    }
+                    if (error > 0) {
+                        // todo show error on the fields
 
-                            break;
-                        case 2:
-                            // Your code when 3rd option seletced
-                            break;
-                        case 3:
-                            // Your code when 4th  option seletced
-                            break;
+                    } else {
+                        LoginTask registerTask = new LoginTask();
+                        registerTask.execute(email.getText().toString(), passw.getText().toString());
 
                     }
 
                 }
             });
-            alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    // TODO Add your code for the button here.
+            Button registro = (Button) findViewById(R.id.buttonSignUp);
+            registro.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                    startActivity(intent);
                 }
             });
-            alertDialog.create();
-            alertDialog.show();
-        }catch( NullPointerException e ){
-            e.printStackTrace();
         }
-
-
-        email = (EditText) findViewById(R.id.editEmail);
-        passw = (EditText) findViewById(R.id.editPass);
-        Button button = (Button) findViewById(R.id.buttonLogin);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int error = 0;
-                if (email.getText().toString().equals("")){
-                    Toast.makeText(getBaseContext(), "Field e-mail is mandatory!", Toast.LENGTH_LONG).show();
-                    error = error+1;
-                }
-                if(passw.getText().toString().equals("")){
-                    Toast.makeText(getBaseContext(), "Field password is mandatory!", Toast.LENGTH_LONG).show();
-                    error = error+1;
-                }
-                if(error > 0){
-                    // todo show error on the fields
-
-                }
-                else{
-                    LoginTask registerTask = new LoginTask();
-                    registerTask.execute(email.getText().toString(), passw.getText().toString() );
-
-                }
-
-            }
-        });
-        Button registro = (Button) findViewById(R.id.buttonSignUp);
-        registro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
     @Override
@@ -250,16 +269,16 @@ public class LoginActivity extends ActionBarActivity {
         @Override
         protected void onPostExecute(User user){
             //super.onPostExecute( );
-            LoginHelper helper = new LoginHelper(getApplicationContext());
+            DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
             if(user != null && user.getToken() != "Could not login" ) {
                 long i = helper.Login(user);
                 if (i > 0) {
-                    Log.e("Register", "User added to the database");
                     Intent intent = new Intent();
                     intent.putExtra("status", "Logged");
                     setResult(RESULT_OK, intent);
-                    SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+                    SharedPreferences.Editor editor = getSharedPreferences("myPref", MODE_PRIVATE).edit();
                     editor.putLong("userid", i);
+                    Log.e(LOG_TAG, String.valueOf(i));
                     editor.apply();
                     finish();
                 }

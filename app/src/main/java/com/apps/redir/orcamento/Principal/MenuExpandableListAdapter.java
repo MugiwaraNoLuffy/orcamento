@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -91,12 +92,10 @@ public class MenuExpandableListAdapter extends BaseExpandableListAdapter{
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = infalInflater.inflate(R.layout.list_group, null);
             }
-
             TextView lblListHeader = (TextView) convertView
                     .findViewById(R.id.lblListHeader);
             lblListHeader.setTypeface(null, Typeface.BOLD);
             lblListHeader.setText(headerTitle);
-
             return convertView;
         }
 

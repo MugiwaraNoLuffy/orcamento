@@ -1,11 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.apps.redir.orcamento.Principal.PrincipalActivity">
+    tools:context="com.apps.redir.orcamento.SQLiteDatabase.CategoriaTable">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/action" android:title="teste"
-        android:orderInCategory="100" app:showAsAction="never"
-        android:icon="@mipmap/add_item"
-        />
 </menu>

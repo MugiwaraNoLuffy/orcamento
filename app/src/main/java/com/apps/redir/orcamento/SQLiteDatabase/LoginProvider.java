@@ -5,7 +5,6 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
@@ -36,10 +35,10 @@ public class LoginProvider extends ContentProvider {
     /**
      * URIMatcher
      */
-    private LoginHelper helper;
+    private DatabaseHelper helper;
     @Override
     public boolean onCreate() {
-        helper = new LoginHelper(getContext());
+        helper = new DatabaseHelper(getContext());
         return true;
     }
 

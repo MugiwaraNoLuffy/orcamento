@@ -16,30 +16,51 @@
         android:layout_height="fill_parent"
         android:layout_margin="5dp">
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="80px"
-            android:id="@+id/imageView" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView3"
+                android:src="@mipmap/add_item"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Adicionar Categoria"
+                android:id="@+id/textView3"
+                android:layout_gravity="center"
+                android:textSize="30dp" />
+        </LinearLayout>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
-            android:hint="Categoria" />
+            android:id="@+id/editCategoria"
+            android:hint="Categoria"
+            android:layout_marginTop="20dp" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/editText2"
+            android:id="@+id/editLimite"
             android:hint="Limite por mês" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Adicionar"
-            android:id="@+id/button" />
+            android:id="@+id/buttonAdicionar" />
 
     </LinearLayout>
+
 </LinearLayout>

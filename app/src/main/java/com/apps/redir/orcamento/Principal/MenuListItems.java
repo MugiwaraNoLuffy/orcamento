@@ -17,19 +17,30 @@ public class MenuListItems {
         listDataChild = new HashMap<String, List<String>>();
     }
     public void populate(){
+        listDataHeader.add("Lançamento");
         listDataHeader.add("Cadastro");
-        listDataHeader.add("Relatórios");
+        listDataHeader.add("Relatório");
+
         List<String> cadastro = new ArrayList<String>();
-        cadastro.add("Lançamentos");
         cadastro.add("Contas");
-        cadastro.add("Limites");
+        cadastro.add("Categorias");
+
         List<String> relatorios = new ArrayList<String>();
         relatorios.add("Entradas");
-        relatorios.add("Saídas");
-        relatorios.add("Limites");
+        relatorios.add("Pagamentos");
+        relatorios.add("Parcelamentos");
         relatorios.add("Geral");
-        listDataChild.put(listDataHeader.get(0), cadastro); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), relatorios);
+
+        List<String> lancamentos = new ArrayList<String>();
+        lancamentos.add("Entradas");
+        lancamentos.add("Pagamentos");
+        lancamentos.add("Transferencias");
+        lancamentos.add("Investimentos");
+        lancamentos.add("Parcelamentos");
+
+        listDataChild.put(listDataHeader.get(0), lancamentos); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), cadastro);
+        listDataChild.put(listDataHeader.get(2), relatorios);
     }
 
     public HashMap<String, List<String>> getData(){

@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.apps.redir.orcamento.R;
-import com.apps.redir.orcamento.SQLiteDatabase.LoginHelper;
+import com.apps.redir.orcamento.SQLiteDatabase.DatabaseHelper;
 import com.apps.redir.orcamento.SQLiteDatabase.User;
 
 import org.apache.http.HttpResponse;
@@ -206,9 +206,9 @@ public class RegisterActivity extends ActionBarActivity {
 
         @Override
         public void onPostExecute(User user){
-            LoginHelper helper = new LoginHelper(getBaseContext());
+            DatabaseHelper helper = new DatabaseHelper(getBaseContext());
 
-            if(helper.insert(user.getContent()) > 0)
+            if(helper.addUser(user.getContent()) > 0)
             {
                 Log.e("Register", "User added to the database");
                 Intent intent = new Intent();

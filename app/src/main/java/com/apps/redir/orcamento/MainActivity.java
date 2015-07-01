@@ -2,6 +2,7 @@ package com.apps.redir.orcamento;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -10,9 +11,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.apps.redir.orcamento.AuthActivities.LoginActivity;
-import com.apps.redir.orcamento.AuthActivities.RegisterActivity;
 import com.apps.redir.orcamento.Principal.PrincipalActivity;
-import com.apps.redir.orcamento.SQLiteDatabase.LoginHelper;
+import com.apps.redir.orcamento.SQLiteDatabase.Categoria;
+import com.apps.redir.orcamento.SQLiteDatabase.CategoriaTable;
+import com.apps.redir.orcamento.SQLiteDatabase.DatabaseHelper;
 import com.apps.redir.orcamento.SQLiteDatabase.User;
 
 import java.util.ArrayList;
@@ -27,26 +29,18 @@ public class MainActivity extends ActionBarActivity {
         SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
 
         textView = (TextView) findViewById(R.id.textView);
+        DatabaseHelper helper = new DatabaseHelper(this);
 
-        LoginHelper helper = new LoginHelper(this);
         ArrayList<User> users = helper.selectAll();
 
-
-        if(users.size() == 0 ){
-            Intent intent = new Intent(this, RegisterActivity.class);
-            int requestCode = 1; // Or some number you choose
-            startActivityForResult(intent, requestCode);
-        }
-        else
-        {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
 
         if(users!=null)
             intent.putParcelableArrayListExtra("users", users);
-        Log.e("Main", String.valueOf(users.size()));
+        //Log.e("Main", String.valueOf(users.size()));
         int requestCode = 1;
         startActivityForResult(intent, requestCode);
-        }
+
 
     }
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
@@ -54,11 +48,13 @@ public class MainActivity extends ActionBarActivity {
         try {
             String value = data.getStringExtra("status");
             Log.e("Retorno", value);
-            SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-
-            String restoredText = new LoginHelper(this).selectId((int) prefs.getLong("userid", 1)).getEmail();
+            SharedPreferences prefs = getSharedPreferences("myPref",MODE_PRIVATE);
+            long i = (long)prefs.getLong("userid", 1);
+            String restoredText = new DatabaseHelper(this).getUserById(i).getEmail();
             textView.setText(restoredText);
+            Log.e("main", restoredText);
             Intent intent = new Intent(this, PrincipalActivity.class);
+
             startActivity(intent);
         }
         catch( NullPointerException e){

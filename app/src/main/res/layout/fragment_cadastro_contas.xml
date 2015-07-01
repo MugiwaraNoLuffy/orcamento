@@ -11,16 +11,36 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="100px"
-            android:id="@+id/imageView2" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:src="@mipmap/add_item"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Adicionar Conta"
+                android:id="@+id/textView2"
+                android:layout_gravity="center"
+                android:textSize="30dp" />
+        </LinearLayout>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editConta"
-            android:hint="Conta" />
+            android:hint="Conta"
+            android:layout_marginTop="10dp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -33,6 +53,7 @@
             android:layout_height="wrap_content"
             android:text="Adicionar"
             android:id="@+id/buttonAdd" />
+
     </LinearLayout>
 </LinearLayout>
 

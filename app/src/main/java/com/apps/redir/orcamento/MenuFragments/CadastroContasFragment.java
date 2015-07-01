@@ -7,8 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.apps.redir.orcamento.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,10 +69,19 @@ public class CadastroContasFragment extends Fragment {
     }
 
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    public JSONObject getJSON(){
+        JSONObject json = new JSONObject();
+        EditText editCategoria = (EditText) getView().findViewById(R.id.editConta);
+        EditText editLimite = (EditText) getView().findViewById(R.id.editCategoria);
+        try {
+            json.accumulate("conta", editCategoria.getText());
+            json.accumulate("categoria", editLimite.getText());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return json;
     }
 
     /**
