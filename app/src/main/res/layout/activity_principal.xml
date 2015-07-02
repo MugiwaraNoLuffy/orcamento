@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:layout_width="240dp"
         android:layout_gravity="start"
-        android:background="#f6f6f6"
+        android:background="#ffffff"
         android:choiceMode="singleChoice"
         android:divider="#abb8baae"
         android:dividerHeight="1dp"

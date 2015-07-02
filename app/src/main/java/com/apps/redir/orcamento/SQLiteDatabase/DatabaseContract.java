@@ -31,20 +31,24 @@ public class DatabaseContract {
 
     public static final class Categoria implements BaseColumns{
         public static final String TABLE_NAME = "categorias";
+        public static final String ID_REMOTE = "id_remote";
         public static final String DESCRICAO = "descricao";
         public static final String LIMITE = "limite_max_mensal";
         static final String SQL_CREATE_CATEGORIA_TABLE = "CREATE TABLE " + TABLE_NAME + " ("+
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                ID_REMOTE + " INTEGER, "+
                 DESCRICAO + " VARCHAR(30) NOT NULL UNIQUE, "+
                 LIMITE + " FLOAT);";
     }
 
     public static final class Contas implements BaseColumns{
         public static final String TABLE_NAME = "contas";
+        public static final String ID_REMOTE = "id_remote";
         public static final String NAME = "nome";
         public static final String ID_CATEGORIA = "idcategoria";
         static final String SQL_CREATE_CONTAS_TABLE = "CREATE TABLE " + TABLE_NAME + " ("+
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                ID_REMOTE + " INTEGER, "+
                 NAME + " VARCHAR(30) NOT NULL UNIQUE, "+
                 ID_CATEGORIA + " INTEGER," +
                 "FOREIGN KEY("+ ID_CATEGORIA +") REFERENCES "+Categoria.TABLE_NAME+"("+Categoria._ID+"));";

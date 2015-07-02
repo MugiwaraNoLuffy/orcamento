@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@null"
+    android:layout_gravity="center"
+    android:layout_margin="10dp">
+<ImageButton
+    android:id="@+id/btn_slide"
+    android:layout_height="80px"
+    android:layout_width="80px"
+    android:background="@null"
+    android:scaleType="centerInside"
+    android:src="@drawable/ic_action_name" />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    android:text="DomAcco"
+    android:id="@+id/textView5"
+    android:layout_gravity="center"
+    android:textColor="#ffffffff" />
+
+</LinearLayout>

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class DatabaseHelper extends SQLiteOpenHelper
 {
     private final String LOG_TAG = DatabaseHelper.class.getSimpleName();
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 1;
     static final String DATABASE_NAME = "orcamento.db";
 
     public DatabaseHelper(Context context) {

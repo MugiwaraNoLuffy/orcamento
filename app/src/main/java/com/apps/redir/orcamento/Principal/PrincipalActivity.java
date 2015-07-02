@@ -3,19 +3,23 @@ package com.apps.redir.orcamento.Principal;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ImageButton;
 
 import com.apps.redir.orcamento.AuthActivities.LoginActivity;
 import com.apps.redir.orcamento.MenuFragments.CadastroCategoriaFragment;
@@ -46,7 +50,10 @@ public class PrincipalActivity extends ActionBarActivity {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         int requestCode = 1;
         startActivityForResult(intent, requestCode);
-
+        ActionBar actionBar = getSupportActionBar();
+        View mActionBarView = getLayoutInflater().inflate(R.layout.custom_bar, null);
+        actionBar.setCustomView(mActionBarView);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setTitle("DOMestic ACCOunting");
         getSupportActionBar().setHomeButtonEnabled(true);
         MenuListItems menuItems = new MenuListItems();
@@ -100,6 +107,15 @@ public class PrincipalActivity extends ActionBarActivity {
 
                 Log.e("","Item Clicked."+preferences.getLong("userid", 1));
                 return false;
+            }
+        });
+        //View action = View.inflate(getApplicationContext(),R.layout.custom_bar, null);
+        ImageButton button2 = (ImageButton) findViewById(R.id.btn_slide);
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(Gravity.LEFT);
             }
         });
     }
